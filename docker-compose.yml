@@ -14,8 +14,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
       - VPN_TYPE=openvpn
-      - OPENVPN_USER=${VPN_USERNAME}
-      - OPENVPN_PASSWORD=${VPN_PASSWORD}
+      - OPENVPN_USER=${username}
+      - OPENVPN_PASSWORD=${password}
       - SERVER_REGIONS=US atlanta
     restart: always
 
