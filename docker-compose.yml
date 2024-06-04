@@ -30,7 +30,7 @@ services:
       - WEBUI_PORT=8080
     volumes:
      - /vikingr:/downloads
-     - /qbittorrent:/config
+     - /arr/qbittorrent:/config
     restart: always
     depends_on: 
       - gluetun
@@ -43,7 +43,7 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /prowlarr:/config
+      - /arr/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -56,7 +56,7 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-      - /radarr:/config
+      - /arr/radarr:/config
       - plex:/plex
     ports:
       - 7878:7878
@@ -70,7 +70,7 @@ services:
     - PGID=1000
     - TZ=America/New_York
   volumes:
-    - /sonarr:/config
+    - /arr/sonarr:/config
     - plex:/plex
   ports:
     - 8989:8989
@@ -84,7 +84,7 @@ services:
     - PGID=1000
     - TZ=Etc/UTC
   volumes:
-    - /overseer:/config
+    - /arr/overseer:/config
     - plex:/plex
   ports:
     - 5055:5055
@@ -97,38 +97,3 @@ volumes:
       o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
       device: "//192.168.69.5/Alexandria/PlexiusMaxius"
 
-  prowlarr:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius/arr/prowlarr"
-
-  radarr:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius/arr/radarr"
-
-  sonarr:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius/arr/sonarr"
-
-  overseerr:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius/arr/r"
-
-  qbittorrent:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius/arr/qbittorrent"
-
-  vikingr:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius/vikingr"
