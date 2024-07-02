@@ -56,6 +56,8 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
+
+      - /media/vikingr:/downloads
       - /media/arr/radarr:/config
       - plex:/plex
     ports:
@@ -70,6 +72,7 @@ services:
     - PGID=1000
     - TZ=America/New_York
   volumes:
+    - /media/vikingr:/downloads
     - /media/arr/sonarr:/config
     - plex:/plex
   ports:
