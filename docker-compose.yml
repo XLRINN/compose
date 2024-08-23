@@ -14,8 +14,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
       - VPN_TYPE=openvpn
-      - OPENVPN_USER=p8089323
-      - OPENVPN_PASSWORD=sTORBiaLminTHiLTRECa!2
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - SERVER_REGIONS=US atlanta
     restart: always
 
@@ -56,10 +56,9 @@ services:
       - PGID=1000
       - TZ=America/New_York
     volumes:
-
       - /media/vikingr:/downloads
       - /media/arr/radarr:/config
-      - plex:/plex
+      - /media:/plex
     ports:
       - 7878:7878
     restart: unless-stopped 
@@ -74,7 +73,7 @@ services:
   volumes:
     - /media/vikingr:/downloads
     - /media/arr/sonarr:/config
-    - plex:/plex
+    - /media:/plex
   ports:
     - 8989:8989
   restart: unless-stopped
@@ -88,14 +87,19 @@ services:
     - TZ=Etc/UTC
   volumes:
     - /media/arr/overseer:/config
-    - plex:/plex
+    - /media:/plex
   ports:
     - 5055:5055
   restart: unless-stopped
 
-volumes:
-  plex:
-    driver_opts:
-      type: "cifs"
-      o: "addr=192.168.69.5,username=david,password=6!y2c87T,vers=3.0,file_mode=0777,dir_mode=0777"
-      device: "//192.168.69.5/Alexandria/PlexiusMaxius"
+ portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "9000:9000"
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /media/arr/portainer:/data
+    restart: always
+
